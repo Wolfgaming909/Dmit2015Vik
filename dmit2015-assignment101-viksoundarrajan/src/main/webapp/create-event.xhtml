@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Create Campus Event</title>
+    </h:head>
+    <h:body>
+        <h2>Create Campus Event</h2>
+        <p>DMIT2015-1261 Assignment 1 by Vik Soundarrajan</p>
+
+        <h:form id="createEventForm">
+            <p:messages id="messages" showDetail="true" closable="true"/>
+
+            <h:panelGrid columns="3">
+
+                <p:outputLabel for="eventName" value="Event Name"/>
+                <p:inputText id="eventName"
+                             value="#{campusEventBean.newCampusEvent.eventName}"
+                             required="true"
+                             requiredMessage="Event name is required."
+                             validatorMessage="Event name must be at least 5 characters.">
+                    <f:validateLength minimum="5"/>
+                </p:inputText>
+                <p:message for="eventName"/>
+
+                <p:outputLabel for="organizerName" value="Organizer Name"/>
+                <p:inputText id="organizerName"
+                             value="#{campusEventBean.newCampusEvent.organizerName}"
+                             required="true"
+                             requiredMessage="Organizer name is required."/>
+                <p:message for="organizerName"/>
+
+                <p:outputLabel for="eventDate" value="Event Date"/>
+                <p:datePicker id="eventDate"
+                              value="#{campusEventBean.newCampusEvent.eventDate}"
+                              pattern="yyyy-MM-dd"
+                              required="true"
+                              requiredMessage="Event date is required."/>
+                <p:message for="eventDate"/>
+
+                <p:outputLabel for="capacity" value="Capacity"/>
+                <p:inputNumber id="capacity"
+                               value="#{campusEventBean.newCampusEvent.capacity}"
+                               required="true"
+                               requiredMessage="Capacity is required."
+                               validatorMessage="Capacity must be greater than 0.">
+                    <f:validateLongRange minimum="1"/>
+                </p:inputNumber>
+                <p:message for="capacity"/>
+
+            </h:panelGrid>
+
+            <p:commandButton value="Submit"
+                              action="#{campusEventBean.createEvent}"
+                              update="@form"/>
+
+        </h:form>
+
+    </h:body>
+</f:view>
+</html>
